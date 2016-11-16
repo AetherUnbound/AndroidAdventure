@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<riddleset xmlns:android="http://schemas.android.com/apk/res/android">
+    <riddle difficulty="1">
+        <text>I cover cities and destroy mountains,\n I make men blind, yet help them see.</text>
+        <choice1>Dirt</choice1>
+        <choice2 answer="correct">Sand</choice2>
+        <choice3>Water</choice3>
+        <choice4>Stone</choice4>
+    </riddle>
+    <riddle difficulty="1">
+        <text>Of no use to one\nYet absolute bliss to two.\nThe small boy gets it for nothing.
+            \nThe young man has to lie for it.\nThe old man has to buy it.</text>
+        <choice1>Money</choice1>
+        <choice2>Candy</choice2>
+        <choice3>A Kiss</choice3>
+        <choice4>A House</choice4>
+    </riddle>
+</riddleset>

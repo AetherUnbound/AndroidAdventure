@@ -8,14 +8,14 @@
                 <text>You find a slot in the wall about the size of your fist</text>
                 <choice1>
                     <text>You stick your hand in</text>
-                    <node>
+                    <node ending="true">
                         <text>You find a hidden treasure!</text>
                         <ending>victory</ending>
                     </node>
                 </choice1>
                 <choice2>
                     <text>You try to peer into it</text>
-                    <node>
+                    <node ending="true">
                         <text>You Lose</text>
                         <ending>failure</ending>
                     </node>
@@ -24,7 +24,7 @@
         </choice1>
         <choice2>
             <text>You decide to lie down on the ground and have a good cry</text>
-            <node>
+            <node ending="true">
                 <text>You Lose</text>
                 <ending>failure</ending>
             </node>

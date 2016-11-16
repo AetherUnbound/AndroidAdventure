@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adventure>
+    <node id="root">
+        <text>You wake up in a cave</text>
+        <choice1>
+            <text>You venture into the cave</text>
+            <node>
+                <text>You find a slot in the wall about the size of your fist</text>
+                <choice1>
+                    <text>You stick your hand in</text>
+                    <node>
+                        <text>You find a hidden treasure!</text>
+                        <ending>victory</ending>
+                    </node>
+                </choice1>
+                <choice2>
+                    <text>You try to peer into it</text>
+                    <node>
+                        <text>You Lose</text>
+                        <ending>failure</ending>
+                    </node>
+                </choice2>
+            </node>
+        </choice1>
+        <choice2>
+            <text>You decide to lie down on the ground and have a good cry</text>
+            <node>
+                <text>You Lose</text>
+                <ending>failure</ending>
+            </node>
+        </choice2>
+    </node>
+</adventure>
+

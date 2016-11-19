@@ -5,6 +5,7 @@ package com.example.liet_kynes.androidadventure;
  */
 
 import android.content.Context;
+import android.util.Log;
 
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
@@ -53,6 +54,7 @@ public class Adventure {
 
             Element rootElement = getFirstChildElement(getFirstChildElement(doc));
             tree = buildBranch(rootElement);
+            Log.d("debug", "Tree built");
 
 
 

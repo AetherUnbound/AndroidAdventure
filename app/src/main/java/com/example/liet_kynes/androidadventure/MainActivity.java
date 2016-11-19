@@ -1,5 +1,7 @@
 package com.example.liet_kynes.androidadventure;
 
+import android.content.Intent;
+import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,8 +14,12 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String EXTRA_MAIN_SOUND = "com.example.lietkynes.androidadventure.main_sound";
+    public static String EXTRA_MAIN_SONG = "com.example.lietkynes.androidadventure.main_song";
+    public static String EXTRA_MAIN_NIGHT_MODE = "com.example.lietkynes.androidadventure.main_night_mode";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //Skeleton code for intents
+            Intent i = new Intent(this, SettingsActivity.class);
+
+
             return true;
         }
 

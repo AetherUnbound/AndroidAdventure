@@ -15,4 +15,26 @@
         <choice3>A Kiss</choice3>
         <choice4>A House</choice4>
     </riddle>
+    <riddle difficulty="3">
+        <text>You will always find me in the past. \nI can be created in the present, \nbut the future can never taint me. \nWhat am I?</text>
+        <choice1>Memories</choice1>
+        <choice2>Photographs</choice2>
+        <choice3 answer="correct">History</choice3>
+        <choice4>Books</choice4>
+    </riddle>
+    <riddle difficulty="2">
+        <text>What belongs to you, but others use it more than you do?</text>
+        <choice1 answer="correct">Your name</choice1>
+        <choice2>Your number</choice2>
+        <choice3>Your SSN</choice3>
+        <choice4>Your email</choice4>
+    </riddle>
+    <riddle difficulty="2">
+        <text>You play with me at night before going to sleep. \nYou can’t get caught fiddling with me at work.
+            \nYou only let a select few people touch me. \nWhat am I?</text>
+        <choice1>Unmentionable</choice1>
+        <choice2 answer="correct">Phone</choice2>
+        <choice3>Laptop</choice3>
+        <choice4>Gameboy</choice4>
+    </riddle>
 </riddleset>

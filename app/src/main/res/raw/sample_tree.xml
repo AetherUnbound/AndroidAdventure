@@ -4,25 +4,20 @@
         <choice1 text="You venture into the cave">
             <node text="You find a slot in the wall about the size of your fist">
                 <choice1 text="You stick your hand in">
-                    <node ending="true">
-                        <text>You find a hidden treasure!</text>
-                        <ending>victory</ending>
+                    <node text="You find a hidden treasure!">
+                        <ending outcome="victory"/>
                     </node>
                 </choice1>
-                <choice2>
-                    <text>You try to peer into it</text>
-                    <node ending="true">
-                        <text>You Lose</text>
-                        <ending>failure</ending>
+                <choice2 text="You try to peer into it">
+                    <node text="You Lose">
+                        <ending outcome="failure"/>
                     </node>
                 </choice2>
             </node>
         </choice1>
-        <choice2>
-            <text>You decide to lie down on the ground and have a good cry</text>
-            <node ending="true">
-                <text>You Lose</text>
-                <ending>failure</ending>
+        <choice2 text="You decide to lie down on the ground and have a good cry">
+            <node text="You Lose">
+                <ending outcome="failure"/>
             </node>
         </choice2>
     </node>

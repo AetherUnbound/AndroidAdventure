@@ -2,4 +2,8 @@
     <string name="app_name">Android Adventure</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="select_song">Select Song</string>
+    <string name="submit_button">Submit</string>
+    <string name="enable_music_switch">Enable music</string>
+    <string name="enable_night_mode">Enable night mode</string>
 </resources>

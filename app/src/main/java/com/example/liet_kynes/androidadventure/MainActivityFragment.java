@@ -15,20 +15,20 @@ import android.widget.TextView;
 public class MainActivityFragment extends Fragment {
 
     public MainActivityFragment() {
-        
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false); //It breaks if we don't have View view = in here
 
         //Items for main fragment
         TextView storyTextView = (TextView) view.findViewById(R.id.storyTextView);
         Button choiceOneButton = (Button) view.findViewById(R.id.choiceOneButton);
         Button choiceTwoButton = (Button) view.findViewById(R.id.choiceTwoButton);
 
-
+    //Added this for skeleton code
     return view;
     }
 }

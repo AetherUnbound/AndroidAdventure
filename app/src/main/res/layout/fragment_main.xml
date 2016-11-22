@@ -14,30 +14,37 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="324dp"
+        android:layout_height="wrap_content"
         android:fillViewport="true">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/storyTextView" />
+            android:id="@+id/storyTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="24sp" />
 
 
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
         <Button
             android:text="Button"
-            android:layout_width="174dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/choiceOneButton" />
+            android:id="@+id/choiceOneButton"
+            android:textSize="18sp" />
 
         <Button
             android:text="Button"
-            android:layout_width="174dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/choiceTwoButton" />
+            android:id="@+id/choiceTwoButton"
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

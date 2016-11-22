@@ -24,9 +24,32 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false); //It breaks if we don't have View view = in here
 
         //Items for main fragment
-        TextView storyTextView = (TextView) view.findViewById(R.id.storyTextView);
-        Button choiceOneButton = (Button) view.findViewById(R.id.choiceOneButton);
-        Button choiceTwoButton = (Button) view.findViewById(R.id.choiceTwoButton);
+        final TextView storyTextView = (TextView) view.findViewById(R.id.storyTextView);
+        final Button choiceOneButton = (Button) view.findViewById(R.id.choiceOneButton);
+        final Button choiceTwoButton = (Button) view.findViewById(R.id.choiceTwoButton);
+
+        final Adventure adventure = new Adventure();
+        try {
+            adventure.buildAdventure(getActivity().getApplicationContext(), storyTextView, choiceOneButton, choiceTwoButton);
+        }
+        catch (Exception e) {
+            Log.d("debug", e.getMessage());
+        }
+
+        choiceOneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adventure.setNewLocation("choice1", storyTextView, choiceOneButton, choiceTwoButton);
+            }
+        });
+
+        choiceTwoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adventure.setNewLocation("choice2", storyTextView, choiceOneButton, choiceTwoButton);
+            }
+        });
+
 
     //Added this for skeleton code
     return view;

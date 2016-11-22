@@ -35,13 +35,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Adventure adventure = new Adventure();
-        try {
-            adventure.buildAdventure(this.getApplicationContext());
-        }
-        catch (Exception e) {
-            Log.d("debug", e.getMessage());
-        }
+
     }
 
     @Override
@@ -61,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             //Skeleton code for intents
-            Intent i = new Intent(this, SettingsActivity.class);
+            //Intent i = new Intent(this, SettingsActivity.class);
 
 
             return true;

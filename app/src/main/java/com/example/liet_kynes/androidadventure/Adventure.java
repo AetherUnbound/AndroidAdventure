@@ -6,6 +6,8 @@ package com.example.liet_kynes.androidadventure;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
@@ -21,13 +23,38 @@ public class Adventure {
     }
 
     //Struct declaration of TreeNode
-    private class TreeNode {
+    protected class TreeNode {
         private String text;
         private String choice1;
         private String choice2;
         private Ending end = Ending.NOEND;
 
         public boolean isEnding() {return end == Ending.NOEND ? false : true;};
+
+        public String getChoice1() {
+            return choice1;
+        }
+        public void setChoice1(String choice1) {
+            this.choice1 = choice1;
+        }
+        public String getChoice2() {
+            return choice2;
+        }
+        public void setChoice2(String choice2) {
+            this.choice2 = choice2;
+        }
+        public Ending getEnd() {
+            return end;
+        }
+        public void setEnd(Ending end) {
+            this.end = end;
+        }
+        public String getText() {
+            return text;
+        }
+        public void setText(String text) {
+            this.text = text;
+        }
     }
 
     //Class declaration of Tree structure
@@ -63,27 +90,27 @@ public class Adventure {
 
         private Tree buildBranch(Element rootNode) throws RuntimeException {
             Tree tree = new Tree();
-            tree.data.text = rootNode.getAttribute("text");
+            tree.data.setText(rootNode.getAttribute("text"));
             Element child1 = getFirstChildElement(rootNode);
             if(child1.getNodeName().equals("choice1")) {
                 //choice 1 of two choices, extract text
-                tree.data.choice1 = child1.getAttribute("text");
+                tree.data.setChoice1(child1.getAttribute("text"));
                 //then build branch from child node of choice 1
                 tree.leftChild = buildBranch(getFirstChildElement(child1));
                 Element child2 = getLastChildElement(rootNode);
                 if(!child2.getNodeName().equals("choice2")) {
                     throw new RuntimeException("Choice 2 not found when expected"); //sanity check
                 }
-                tree.data.choice2 = child2.getAttribute("text");
+                tree.data.setChoice2(child2.getAttribute("text"));
                 tree.rightChild = buildBranch(getFirstChildElement(child2));
             }
             else if(child1.getNodeName().equals("ending")) {
                 String outcome = child1.getAttribute("outcome");
                 if(outcome.equals("failure")) {
-                    tree.data.end = Ending.FAILURE;
+                    tree.data.setEnd(Ending.FAILURE);
                 }
                 else if (outcome.equals("victory")) {
-                    tree.data.end = Ending.VICTORY;
+                    tree.data.setEnd(Ending.VICTORY);
                 }
                 else {
                     throw new RuntimeException("Unexpected outcome of ending");
@@ -119,9 +146,28 @@ public class Adventure {
         }
     }
 
+    //Class properties
+    private Tree adventureTree; //Tree of whole adventure
+    private Tree playerTree;    //Subtree of player's location
 
-    public void buildAdventure(Context context) throws ParserConfigurationException, SAXException, IOException, RuntimeException{
-        Tree adventure = new Tree();
-        adventure.buildTree(context);
+
+    public void buildAdventure(Context context, TextView storyTV, Button c1Button, Button c2Button)
+            throws ParserConfigurationException, SAXException, IOException, RuntimeException{
+        adventureTree = new Tree().buildTree(context);
+        playerTree = adventureTree;
+        this.setNewLocation("root", storyTV, c1Button, c2Button);
+    }
+
+    public void setNewLocation(String choice, TextView storyTV, Button c1Button, Button c2Button) {
+        if (choice.equals("choice1")) {
+            playerTree = playerTree.leftChild;
+        }
+        else if (choice.equals("choice2")) {
+            playerTree = playerTree.rightChild;
+        }
+        //else the node is the root
+        storyTV.setText(playerTree.data.getText());
+        c1Button.setText(playerTree.data.getChoice1());
+        c2Button.setText(playerTree.data.getChoice2());
     }
 }

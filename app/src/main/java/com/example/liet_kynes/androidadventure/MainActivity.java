@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     public static String EXTRA_MAIN_SOUND = "com.example.lietkynes.androidadventure.main_sound";
     public static String EXTRA_MAIN_SONG = "com.example.lietkynes.androidadventure.main_song";
     public static String EXTRA_MAIN_NIGHT_MODE = "com.example.lietkynes.androidadventure.main_night_mode";
+    public static String EXTRA_MAIN_DIFF_LEVEL = "com.example.lietkynes.androidadventure.main_diff_level";
+    private int DIFFICULTY_LEVEL = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -19,7 +19,7 @@ import java.io.IOException;
 public class Adventure {
     //Enumeration for endings
     private enum Ending {
-        NOEND, VICTORY, FAILURE
+        NOEND, VICTORY, FAILURE, RIDDLE
     }
 
     //Struct declaration of TreeNode
@@ -29,7 +29,8 @@ public class Adventure {
         private String choice2;
         private Ending end = Ending.NOEND;
 
-        public boolean isEnding() {return end == Ending.NOEND ? false : true;};
+        public boolean isEnding() {return (end == Ending.VICTORY || end == Ending.FAILURE);}
+        public boolean isRiddle() {return (end == Ending.RIDDLE);}
 
         public String getChoice1() {
             return choice1;
@@ -158,7 +159,7 @@ public class Adventure {
         this.setNewLocation("root", storyTV, c1Button, c2Button);
     }
 
-    public void setNewLocation(String choice, TextView storyTV, Button c1Button, Button c2Button) {
+    public boolean setNewLocation(String choice, TextView storyTV, Button c1Button, Button c2Button) {
         if (choice.equals("choice1")) {
             playerTree = playerTree.leftChild;
         }
@@ -169,5 +170,6 @@ public class Adventure {
         storyTV.setText(playerTree.data.getText());
         c1Button.setText(playerTree.data.getChoice1());
         c2Button.setText(playerTree.data.getChoice2());
+        return playerTree.data.isEnding();
     }
 }

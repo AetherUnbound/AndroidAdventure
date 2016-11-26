@@ -1,5 +1,6 @@
 package com.example.liet_kynes.androidadventure;
 
+import android.media.MediaPlayer;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;

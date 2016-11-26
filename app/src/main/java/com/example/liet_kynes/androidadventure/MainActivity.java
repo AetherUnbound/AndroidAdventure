@@ -1,6 +1,8 @@
 package com.example.liet_kynes.androidadventure;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public static String EXTRA_MAIN_SONG = "com.example.lietkynes.androidadventure.main_song";
     public static String EXTRA_MAIN_NIGHT_MODE = "com.example.lietkynes.androidadventure.main_night_mode";
     public static String EXTRA_MAIN_DIFF_LEVEL = "com.example.lietkynes.androidadventure.main_diff_level";
+    private static final int REQUEST_SONG_CHANGE = 0;
     private int DIFFICULTY_LEVEL = 1;
 
     @Override
@@ -35,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.ambient_cave);
+        mediaPlayer.start();
 
 
     }
@@ -57,12 +61,31 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             //Skeleton code for intents
-            //Intent i = new Intent(this, SettingsActivity.class);
+            Intent i = new Intent(this, SettingsActivity.class);
+            i.putExtra(EXTRA_MAIN_SOUND, true); //Sound is on by default
+            i.putExtra(EXTRA_MAIN_SONG, 0); //Default song is element 0 in the array
+            i.putExtra(EXTRA_MAIN_DIFF_LEVEL, 1); //Default difficulty starts at 1
+            i.putExtra(EXTRA_MAIN_NIGHT_MODE, false); //This may be harder to do than I originally thought, but I'm giving it a shot
 
+            startActivityForResult(i, REQUEST_SONG_CHANGE); //I'm not 100% sure this is proper form, but it works
 
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //Skeleton to return the intent and change settings in the main fragment
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK){ //Check for failure
+            return;
+        }
+
+        if (requestCode == REQUEST_SONG_CHANGE){
+            if (data == null)
+                return; //Default case; nothing changed
+        }
+
     }
 }

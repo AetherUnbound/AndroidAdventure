@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <adventure>
-    <node text="You wake up in a cave">
-        <choice1 text="You venture into the cave">
-            <node text="You find a slot in the wall about the size of your fist">
-                <choice1 text="You stick your hand in">
-                    <node text="You find a hidden treasure!">
-                        <ending outcome="victory"/>
+    <node text="You wake up in a cave. It is dark outside, and you hear rain. The fire that you had has burned down to embers, but there is still more wood. You hear faint noises from further inside the cave.">
+        <choice1 text="Venture deeper into the cave">
+            <node text="You grab one of the sticks of wood and make a torch. You make your way further into the cave. There is a path that leads left. You feel a cool air standing in from of the path. There stairs descending down to your right leading deeper into the cave.">
+                <choice1 text="Take the path to the left">
+                    <node text="You decide to take the path to the left. You start walking down it, the torch casting shadows on the walls.">
+                        <choice1 text="">
+                            <node text="">
+
+                            </node>
+                        </choice1>
+                        <choice2 text="">
+                            <node text="">
+                                
+                            </node>
+                        </choice2>
                     </node>
                 </choice1>
-                <choice2 text="You try to peer into it">
-                    <node text="You Lose">
-                        <ending outcome="failure"/>
+                <choice2 text="Go down the stairs deeper into the cave">
+                    <node text="You begin to descend the stairs, wondering who or what carved them into the stone. You hear more noises echoing off the walls. When you reach the bottom of the stairs, you are in a long room. You are amazed at how tall the ceiling is. There are several doors in the hall, and a gate at the other side.">
+                        <choice1 text="Open the first door you reach in the room.">
+                            <node text="">
+
+                            </node>
+                        </choice1>
+                        <choice2 text="Make your way to the gate at the end of the hall">
+                            <node text="">
+
+                            </node>
+                        </choice2>
                     </node>
                 </choice2>
             </node>
         </choice1>
-        <choice2 text="You decide to lie down on the ground and have a good cry">
+        <choice2 text="Leave the cave and brave the rain">
             <node text="You Lose">
                 <ending outcome="failure"/>
             </node>

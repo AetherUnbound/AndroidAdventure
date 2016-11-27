@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static String EXTRA_MAIN_DIFF_LEVEL = "com.example.lietkynes.androidadventure.main_diff_level";
     private static final int REQUEST_SONG_CHANGE = 0;
     //Variables and their default values
-    private int difficulty_level = 4;
+    private int difficulty_level = 0;
     private int track = 0;
     private boolean musicPlaying = true;
     private boolean nightMode = false;

@@ -64,7 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
         music = fromAdventure.getBooleanExtra(EXTRA_MAIN_SOUND, true);
         track = fromAdventure.getIntExtra(EXTRA_MAIN_SONG, 0); //Default song is 0 in the array
         nightMode = fromAdventure.getBooleanExtra(EXTRA_MAIN_NIGHT_MODE, false);
-        difficulty = fromAdventure.getIntExtra(EXTRA_MAIN_DIFF_LEVEL, 4); //Default difficulty is text input only
+        difficulty = fromAdventure.getIntExtra(EXTRA_MAIN_DIFF_LEVEL, 0); //Default difficulty is text input only
 
         //Take that data and change the settings view to match the configuration
         playMusicSwitch.setChecked(music);

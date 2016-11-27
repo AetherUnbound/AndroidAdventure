@@ -6,13 +6,13 @@
                 <choice1 text="Take the path to the left">
                     <node text="You decide to take the path to the left. You start walking down it, the torch casting shadows on the walls. As you walk, you notice a crack in the wall big enough to squeeze into.">
                         <choice1 text="Continue walking">
-                            <node text="">
-
+                            <node text="You trip and fall into a pit">
+                                <ending outcome="failure"/>
                             </node>
                         </choice1>
                         <choice2 text="Investigate the crack">
-                            <node text="">
-
+                            <node text="You notice a gold treasure hidden in the folds">
+                                <ending outcome="victory"/>
                             </node>
                         </choice2>
                     </node>
@@ -20,13 +20,13 @@
                 <choice2 text="Go down the stairs deeper into the cave">
                     <node text="You begin to descend the stairs, wondering who or what carved them into the stone. You hear more noises echoing off the walls. When you reach the bottom of the stairs, you are in a long room. You are amazed at how tall the ceiling is. There are several doors in the hall, and a gate at the other side.">
                         <choice1 text="Open the first door you reach in the room.">
-                            <node text="">
-
+                            <node text="Placeholder">
+                                <ending outcome="victory"/>
                             </node>
                         </choice1>
                         <choice2 text="Make your way to the gate at the end of the hall">
-                            <node text="">
-
+                            <node text="Placeholder">
+                                <ending outcome="failure"/>
                             </node>
                         </choice2>
                     </node>
@@ -42,7 +42,7 @@
                 </choice1>
                 <choice2 text="Make your way down towards the castle">
                     <node text="You make your way down to the bottom of the mountain, and at the bottom is a ">
-
+                        <ending outcome="failure"/>
                     </node>
                 </choice2>
             </node>

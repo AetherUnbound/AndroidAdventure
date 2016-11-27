@@ -8,4 +8,11 @@
     <string name="enable_night_mode">Enable night mode</string>
 
     <string name="ambient_cave">Ambient Cave</string>
+
+    <string name="select_difficulty">Select difficulty</string>
+    <string name="diff_easy">Easy riddles</string>
+    <string name="diff_medium">Moderate riddles</string>
+    <string name="diff_hard">Challenging riddles</string>
+    <string name="diff_text_input">Text input, no choices</string>
+
 </resources>

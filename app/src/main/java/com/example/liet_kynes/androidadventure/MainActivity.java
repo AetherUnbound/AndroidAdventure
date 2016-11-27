@@ -21,7 +21,34 @@ public class MainActivity extends AppCompatActivity {
     public static String EXTRA_MAIN_NIGHT_MODE = "com.example.lietkynes.androidadventure.main_night_mode";
     public static String EXTRA_MAIN_DIFF_LEVEL = "com.example.lietkynes.androidadventure.main_diff_level";
     private static final int REQUEST_SONG_CHANGE = 0;
-    private int DIFFICULTY_LEVEL = 1;
+    //Variables and their default values
+    private int difficulty_level = 4;
+    private int track = 0;
+    private boolean musicPlaying = true;
+    private boolean nightMode = false;
+    MediaPlayer mediaPlayer;
+
+    protected void pauseMusic() {
+        mediaPlayer.pause();
+    }
+
+    protected void resumeMusic() {
+        if (!mediaPlayer.isPlaying() && musicPlaying)
+            mediaPlayer.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        pauseMusic();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        resumeMusic();
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.ambient_cave);
+
+        //Start off with some sound
+        mediaPlayer = MediaPlayer.create(this, R.raw.ambient_cave);
         mediaPlayer.start();
-
-
     }
 
     @Override
@@ -60,12 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            //Skeleton code for intents
+            //Setting and sending data to the settings activity
             Intent i = new Intent(this, SettingsActivity.class);
-            i.putExtra(EXTRA_MAIN_SOUND, true); //Sound is on by default
-            i.putExtra(EXTRA_MAIN_SONG, 0); //Default song is element 0 in the array
-            i.putExtra(EXTRA_MAIN_DIFF_LEVEL, 1); //Default difficulty starts at 1
-            i.putExtra(EXTRA_MAIN_NIGHT_MODE, false); //This may be harder to do than I originally thought, but I'm giving it a shot
+            i.putExtra(EXTRA_MAIN_SOUND, musicPlaying); //Sound is on by default
+            i.putExtra(EXTRA_MAIN_SONG, track); //Default song is element 0 in the array
+            i.putExtra(EXTRA_MAIN_DIFF_LEVEL, difficulty_level); //Default difficulty is 4, for text input only
+            i.putExtra(EXTRA_MAIN_NIGHT_MODE, nightMode); //This may be harder to do than I originally thought, but I'm giving it a shot
 
             startActivityForResult(i, REQUEST_SONG_CHANGE); //I'm not 100% sure this is proper form, but it works
 
@@ -85,7 +112,26 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_SONG_CHANGE){
             if (data == null)
                 return; //Default case; nothing changed
+
+            //Change track setting change
+            track = data.getIntExtra(EXTRA_MAIN_SONG, 0);
+
+            //Difficulty level
+            if (data.getIntExtra(EXTRA_MAIN_DIFF_LEVEL, 4) != 4){
+                //Code to change the difficulty level
+            }
+
+            //Nightmode code
+            nightMode = data.getBooleanExtra(EXTRA_MAIN_NIGHT_MODE, false);
+
+            //Turn music/sound off/on
+            if (!data.getBooleanExtra(EXTRA_MAIN_SOUND, true)){
+                musicPlaying = false;
+            }
+
+
         }
 
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

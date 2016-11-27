@@ -41,7 +41,7 @@
                     </node>
                 </choice1>
                 <choice2 text="Make your way down towards the castle">
-                    <node text="">
+                    <node text="You make your way down to the bottom of the mountain, and at the bottom is a ">
 
                     </node>
                 </choice2>

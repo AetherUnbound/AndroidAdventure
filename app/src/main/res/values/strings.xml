@@ -6,4 +6,6 @@
     <string name="submit_button">Submit</string>
     <string name="enable_music_switch">Enable music</string>
     <string name="enable_night_mode">Enable night mode</string>
+
+    <string name="ambient_cave">Ambient Cave</string>
 </resources>

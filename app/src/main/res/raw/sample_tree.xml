@@ -4,15 +4,15 @@
         <choice1 text="Venture deeper into the cave">
             <node text="You grab one of the sticks of wood and make a torch. You make your way further into the cave. There is a path that leads left. You feel a cool air standing in from of the path. There stairs descending down to your right leading deeper into the cave.">
                 <choice1 text="Take the path to the left">
-                    <node text="You decide to take the path to the left. You start walking down it, the torch casting shadows on the walls.">
-                        <choice1 text="">
+                    <node text="You decide to take the path to the left. You start walking down it, the torch casting shadows on the walls. As you walk, you notice a crack in the wall big enough to squeeze into.">
+                        <choice1 text="Continue walking">
                             <node text="">
 
                             </node>
                         </choice1>
-                        <choice2 text="">
+                        <choice2 text="Investigate the crack">
                             <node text="">
-                                
+
                             </node>
                         </choice2>
                     </node>
@@ -33,9 +33,18 @@
                 </choice2>
             </node>
         </choice1>
-        <choice2 text="Leave the cave and brave the rain">
-            <node text="You Lose">
-                <ending outcome="failure"/>
+        <choice2 text="Leave the cave.">
+            <node text="You make your way to the entrance of the cave and realize that it is not raining at all but small rocks rolling down. As you get outside, you see small mountain goats climbing above the mouth of the cave. In the distance, you see a castle.">
+                <choice1 text="Head towards the goats">
+                    <node text="You climb up towards the goats. They scatter and run away. As you are climbing, your footing slips, and you begin to slide. You fall off the edge of a cliff and die.">
+                        <ending outcome="failure"/>
+                    </node>
+                </choice1>
+                <choice2 text="Make your way down towards the castle">
+                    <node text="">
+
+                    </node>
+                </choice2>
             </node>
         </choice2>
     </node>

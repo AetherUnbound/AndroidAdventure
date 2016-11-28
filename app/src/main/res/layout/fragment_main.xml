@@ -22,7 +22,8 @@
             android:layout_height="match_parent"
             android:id="@+id/storyTextView"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textAlignment="center" />
 
 
     </ScrollView>

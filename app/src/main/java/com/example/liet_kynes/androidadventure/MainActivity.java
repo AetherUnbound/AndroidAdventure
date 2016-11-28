@@ -66,8 +66,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Restarting Adventure...", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                MainActivityFragment frag = (MainActivityFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+                MainActivityFragment.restartAdventure(frag);
             }
         });
 

@@ -79,4 +79,8 @@ public class MainActivityFragment extends Fragment {
 
         outState.putInt(PLAYER_POSITION, ADVENTURE.getPlayerPosition());
     }
+
+    public static void restartAdventure(MainActivityFragment fragment) {
+        fragment.ADVENTURE.restartAdventure();
+    }
 }

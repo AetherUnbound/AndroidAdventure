@@ -181,6 +181,11 @@ public class Adventure {
         this.setNewLocation("root");
     }
 
+    public void restartAdventure() {
+        playerTree = adventureTree;
+        this.setNewLocation("root");
+    }
+
     private Tree searchAdventureForResume(Tree root, int nodeNumber){
         if(root != null) {
             if(root.nodeNumber == nodeNumber) {

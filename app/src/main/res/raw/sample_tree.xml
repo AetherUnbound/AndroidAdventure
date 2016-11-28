@@ -33,7 +33,7 @@
                 </choice2>
             </node>
         </choice1>
-        <choice2 text="Leave the cave.">
+        <choice2 text="Leave the cave">
             <node text="You make your way to the entrance of the cave and realize that it is not raining at all but small rocks rolling down. As you get outside, you see small mountain goats climbing above the mouth of the cave. In the distance, you see a castle.">
                 <choice1 text="Head towards the goats">
                     <node text="You climb up towards the goats. They scatter and run away. As you are climbing, your footing slips, and you begin to slide. You fall off the edge of a cliff and die.">

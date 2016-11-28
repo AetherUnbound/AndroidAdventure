@@ -23,6 +23,34 @@ import static com.example.liet_kynes.androidadventure.MainActivity.EXTRA_MAIN_SO
 
 public class SettingsActivity extends AppCompatActivity {
 
+    //These functions allow us to pass strictly the audio resource tag rather than setting global
+    // variables for these values
+    public int getTrackIndex(int rawValue){
+        if(rawValue == R.raw.ambient_cave)
+            return 0;
+        else if(rawValue == R.raw.forest_night)
+            return 1;
+        else if(rawValue == R.raw.winter_woods)
+            return 2;
+        else if(rawValue == R.raw.nightmare)
+            return 3;
+        else
+            return -1;
+    }
+
+    public int getMP3ResourceValue(int trackIndex){
+        if(trackIndex == 0)
+            return R.raw.ambient_cave;
+        else if(trackIndex == 1)
+            return R.raw.forest_night;
+        else if(trackIndex == 2)
+            return R.raw.winter_woods;
+        else if(trackIndex == 3)
+            return R.raw.nightmare;
+        else
+            return -1;
+    }
+
     private boolean music;
     private boolean nightMode;
     private int track;
@@ -62,7 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
         //Get data from main intent
         Intent fromAdventure = getIntent();
         music = fromAdventure.getBooleanExtra(EXTRA_MAIN_SOUND, true);
-        track = fromAdventure.getIntExtra(EXTRA_MAIN_SONG, 0); //Default song is 0 in the array
+        track = fromAdventure.getIntExtra(EXTRA_MAIN_SONG, R.raw.ambient_cave); //Default song is 0 in the array
         nightMode = fromAdventure.getBooleanExtra(EXTRA_MAIN_NIGHT_MODE, false);
         difficulty = fromAdventure.getIntExtra(EXTRA_MAIN_DIFF_LEVEL, 0); //Default difficulty is text input only
 
@@ -70,7 +98,7 @@ public class SettingsActivity extends AppCompatActivity {
         playMusicSwitch.setChecked(music);
         nightModeSwitch.setChecked(nightMode);
         difficultySpinner.setSelection(difficulty);
-        songSpinner.setSelection(track);
+        songSpinner.setSelection(getTrackIndex(track));
 
         //Play music switch functionality
         playMusicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
@@ -89,7 +117,7 @@ public class SettingsActivity extends AppCompatActivity {
         songSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                track = position; //should set new resource value
+                track = getMP3ResourceValue(position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

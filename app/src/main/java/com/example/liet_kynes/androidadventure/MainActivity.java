@@ -2,8 +2,8 @@ package com.example.liet_kynes.androidadventure;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
-import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,11 +24,12 @@ public class MainActivity extends AppCompatActivity {
     public static String EXTRA_MAIN_NIGHT_MODE = "com.example.lietkynes.androidadventure.main_night_mode";
     public static String EXTRA_MAIN_DIFF_LEVEL = "com.example.lietkynes.androidadventure.main_diff_level";
     private static final int REQUEST_SONG_CHANGE = 0;
+    private static String TAG = "DEBUG";
     //Variables and their default values
-    private int difficulty_level = 0;
-    private int track = 0;
-    private boolean musicPlaying = true;
-    private boolean nightMode = false;
+    private int DIFFICULTY_LEVEL = 0;
+    private int TRACK = 0;
+    private boolean IS_PLAYING = true;
+    private boolean IS_NIGHT_MODE = false;
     MediaPlayer mediaPlayer;
 
     protected void pauseMusic() {
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void resumeMusic() {
-        if (!mediaPlayer.isPlaying() && musicPlaying)
+        if (!mediaPlayer.isPlaying() && IS_PLAYING)
             mediaPlayer.start();
     }
 
@@ -66,9 +70,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Start off with some sound
-        mediaPlayer = MediaPlayer.create(this, R.raw.ambient_cave);
-        mediaPlayer.start();
+        if(savedInstanceState != null) {
+            //anything to be saved through orientation change
+        }
+        else {
+            //If app has just started, begin music player
+            //Start off with some sound
+            mediaPlayer = MediaPlayer.create(this, R.raw.ambient_cave);
+            mediaPlayer.start();
+        }
+
+
     }
 
     @Override
@@ -89,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             //Setting and sending data to the settings activity
             Intent i = new Intent(this, SettingsActivity.class);
-            i.putExtra(EXTRA_MAIN_SOUND, musicPlaying); //Sound is on by default
-            i.putExtra(EXTRA_MAIN_SONG, track); //Default song is element 0 in the array
-            i.putExtra(EXTRA_MAIN_DIFF_LEVEL, difficulty_level); //Default difficulty is 4, for text input only
-            i.putExtra(EXTRA_MAIN_NIGHT_MODE, nightMode); //This may be harder to do than I originally thought, but I'm giving it a shot
+            i.putExtra(EXTRA_MAIN_SOUND, IS_PLAYING); //Sound is on by default
+            i.putExtra(EXTRA_MAIN_SONG, TRACK); //Default song is element 0 in the array
+            i.putExtra(EXTRA_MAIN_DIFF_LEVEL, DIFFICULTY_LEVEL); //Default difficulty is 4, for text input only
+            i.putExtra(EXTRA_MAIN_NIGHT_MODE, IS_NIGHT_MODE); //This may be harder to do than I originally thought, but I'm giving it a shot
 
             startActivityForResult(i, REQUEST_SONG_CHANGE); //I'm not 100% sure this is proper form, but it works
 
@@ -113,8 +125,12 @@ public class MainActivity extends AppCompatActivity {
             if (data == null)
                 return; //Default case; nothing changed
 
-            //Change track setting change
-            track = data.getIntExtra(EXTRA_MAIN_SONG, 0);
+            //Change TRACK setting change
+            int track = data.getIntExtra(EXTRA_MAIN_SONG, 0);
+            if (track != TRACK) {
+                updateTrack(track);
+                Toast.makeText(MainActivity.this, "Music Track Changed", Toast.LENGTH_SHORT).show();
+            }
 
             //Difficulty level
             if (data.getIntExtra(EXTRA_MAIN_DIFF_LEVEL, 4) != 4){
@@ -122,16 +138,32 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //Nightmode code
-            nightMode = data.getBooleanExtra(EXTRA_MAIN_NIGHT_MODE, false);
+            IS_NIGHT_MODE = data.getBooleanExtra(EXTRA_MAIN_NIGHT_MODE, false);
 
             //Turn music/sound off/on
             if (!data.getBooleanExtra(EXTRA_MAIN_SOUND, true)){
-                musicPlaying = false;
+                IS_PLAYING = false;
             }
 
 
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void updateTrack(int track) {
+        mediaPlayer.pause();
+        mediaPlayer.reset();
+        AssetFileDescriptor afd = getResources().openRawResourceFd(track);
+        try {
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            afd.close();
+            mediaPlayer.prepare();
+        }
+        catch (IOException ioe) {
+            Log.d(TAG, "IOException when trying to locate new TRACK" + ioe);
+        }
+        TRACK = track;
+        resumeMusic();
     }
 }

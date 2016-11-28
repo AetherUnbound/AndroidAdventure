@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -27,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private static String TAG = "DEBUG";
     //Variables and their default values
     private int DIFFICULTY_LEVEL = 0;
-    private int TRACK = 0;
+    private int TRACK = R.raw.ambient_cave;
     private boolean IS_PLAYING = true;
     private boolean IS_NIGHT_MODE = false;
-    MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
 
     protected void pauseMusic() {
         mediaPlayer.pause();
@@ -76,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         else {
             //If app has just started, begin music player
             //Start off with some sound
-            mediaPlayer = MediaPlayer.create(this, R.raw.ambient_cave);
+            mediaPlayer = MediaPlayer.create(this, TRACK);
+            mediaPlayer.setLooping(true);
             mediaPlayer.start();
         }
 
@@ -149,6 +151,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Log.d(TAG, "Breakpoint testing");
     }
 
     private void updateTrack(int track) {

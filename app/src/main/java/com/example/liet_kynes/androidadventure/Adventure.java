@@ -17,6 +17,8 @@ import java.io.IOException;
 
 //Class declaration of "Adventure"
 public class Adventure {
+    private static final String TAG = "ADVENTURE_DEBUT";
+
     //Enumeration for endings
     private enum Ending {
         NOEND, VICTORY, FAILURE, RIDDLE
@@ -61,6 +63,7 @@ public class Adventure {
     //Class declaration of Tree structure
     //Want a Pre-order traversal to build
     private class Tree {
+        public int nodeNumber = 0;
         public TreeNode data;
         public Tree leftChild;
         public Tree rightChild;
@@ -75,14 +78,14 @@ public class Adventure {
 
         public Tree buildTree(Context context) throws ParserConfigurationException, SAXException, IOException, RuntimeException {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            Tree tree = new Tree();
+            Tree tree;
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(context.getResources().openRawResource(R.raw.sample_tree));
             //At this point we have a DOM built, now we need to construct it into the tree
 
             Element rootElement = getFirstChildElement(getFirstChildElement(doc));
             tree = buildBranch(rootElement);
-            Log.d("debug", "Tree built");
+            Log.d(TAG, "Tree built");
 
 
 
@@ -91,6 +94,7 @@ public class Adventure {
 
         private Tree buildBranch(Element rootNode) throws RuntimeException {
             Tree tree = new Tree();
+            tree.nodeNumber = nodeNumber++;
             tree.data.setText(rootNode.getAttribute("text"));
             Element child1 = getFirstChildElement(rootNode);
             if(child1.getNodeName().equals("choice1")) {
@@ -150,16 +154,56 @@ public class Adventure {
     //Class properties
     private Tree adventureTree; //Tree of whole adventure
     private Tree playerTree;    //Subtree of player's location
+    private Context parentContext; //Context of parent fragment
+    private TextView storyTextView; //Textview of parent
+    private Button choice1Button; //Button for choice 1 on parent
+    private Button choice2Button; //Button for choice 2 on parent
 
-
-    public void buildAdventure(Context context, TextView storyTV, Button c1Button, Button c2Button)
-            throws ParserConfigurationException, SAXException, IOException, RuntimeException{
-        adventureTree = new Tree().buildTree(context);
-        playerTree = adventureTree;
-        this.setNewLocation("root", storyTV, c1Button, c2Button);
+    Adventure(Context context, TextView storyTV, Button c1Button, Button c2Button) {
+        this.parentContext = context;
+        this.storyTextView = storyTV;
+        this.choice1Button = c1Button;
+        this.choice2Button = c2Button;
     }
 
-    public boolean setNewLocation(String choice, TextView storyTV, Button c1Button, Button c2Button) {
+
+    public void buildAdventure()
+            throws ParserConfigurationException, SAXException, IOException, RuntimeException{
+        adventureTree = new Tree().buildTree(parentContext);
+        playerTree = adventureTree;
+        this.setNewLocation("root");
+    }
+
+    public void buildAdventure(int nodeToResume)
+            throws ParserConfigurationException, SAXException, IOException, RuntimeException{
+        adventureTree = new Tree().buildTree(parentContext);
+        playerTree = searchAdventureForResume(adventureTree, nodeToResume);
+        this.setNewLocation("root");
+    }
+
+    private Tree searchAdventureForResume(Tree root, int nodeNumber){
+        if(root != null) {
+            if(root.nodeNumber == nodeNumber) {
+                return root;
+            }
+            else {
+                Tree foundNode = searchAdventureForResume(root.leftChild, nodeNumber);
+                if (foundNode == null) {
+                    foundNode = searchAdventureForResume(root.rightChild, nodeNumber);
+                }
+                return foundNode;
+            }
+        }
+        else
+            return null;
+    }
+
+    public int getPlayerPosition() {
+        return this.playerTree.nodeNumber;
+    }
+
+
+    public boolean setNewLocation(String choice){
         if (choice.equals("choice1")) {
             playerTree = playerTree.leftChild;
         }
@@ -167,9 +211,9 @@ public class Adventure {
             playerTree = playerTree.rightChild;
         }
         //else the node is the root
-        storyTV.setText(playerTree.data.getText());
-        c1Button.setText(playerTree.data.getChoice1());
-        c2Button.setText(playerTree.data.getChoice2());
+        storyTextView.setText(playerTree.data.getText());
+        choice1Button.setText(playerTree.data.getChoice1());
+        choice2Button.setText(playerTree.data.getChoice2());
         return playerTree.data.isEnding();
     }
 }

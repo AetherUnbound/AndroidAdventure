@@ -19,6 +19,7 @@ public class AdventureFragment extends Fragment {
 
     private static final String TAG = "MAIN_FRAGMENT_DEBUG";
     public static final String PLAYER_POSITION = "PLAYER_POSITION";
+    public static final String TAG_RIDDLE_FRAGMENT = "RIDDLE_FRAGMENT";
     private Adventure ADVENTURE;
     Animation fadeInAnimation;
     Animation fadeOutAnimation;
@@ -77,6 +78,10 @@ public class AdventureFragment extends Fragment {
 
                 //storyTextView.setVisibility(View.INVISIBLE); Matt, this is the code to use to transition easier.
                 ADVENTURE.setNewLocation("choice1");
+                if(ADVENTURE.isRiddle()) {
+                    //launch riddle activity
+                    launchRiddle();
+                }
             }
         });
 
@@ -102,7 +107,23 @@ public class AdventureFragment extends Fragment {
         outState.putInt(PLAYER_POSITION, ADVENTURE.getPlayerPosition());
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
     public static void restartAdventure(AdventureFragment fragment) {
         fragment.ADVENTURE.restartAdventure();
     }
+
+    private void launchRiddle() {
+        int diff = MainActivity.getDIFFICULTY_LEVEL((MainActivity)getActivity());
+        RiddleFragment riddleFragment = new RiddleFragment();
+        ((MainActivity) getActivity()).replaceAdventureFragmentWithRiddle(riddleFragment);
+//        this.getChildFragmentManager().beginTransaction()
+//                .replace(R.id.fragment_riddle, riddleFragment, TAG_RIDDLE_FRAGMENT)
+//                .addToBackStack(null)
+//                .commit();
+    }
+
 }

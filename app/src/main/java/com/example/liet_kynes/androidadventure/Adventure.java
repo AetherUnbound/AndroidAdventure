@@ -31,8 +31,6 @@ public class Adventure {
         private String choice2;
         private Ending end = Ending.NOEND;
 
-        public boolean isEnding() {return (end == Ending.VICTORY || end == Ending.FAILURE);}
-        public boolean isRiddle() {return (end == Ending.RIDDLE);}
 
         public String getChoice1() {
             return choice1;
@@ -121,6 +119,9 @@ public class Adventure {
                     throw new RuntimeException("Unexpected outcome of ending");
                 }
             }
+            else if(child1.getNodeName().equals("riddle")) {
+                tree.data.setEnd(Ending.RIDDLE);
+            }
             return tree;
         }
 
@@ -208,7 +209,7 @@ public class Adventure {
     }
 
 
-    public boolean setNewLocation(String choice){
+    public void setNewLocation(String choice){
         if (choice.equals("choice1")) {
             playerTree = playerTree.leftChild;
         }
@@ -219,6 +220,8 @@ public class Adventure {
         storyTextView.setText(playerTree.data.getText());
         choice1Button.setText(playerTree.data.getChoice1());
         choice2Button.setText(playerTree.data.getChoice2());
-        return playerTree.data.isEnding();
     }
+
+    public boolean isEnding() {return (playerTree.data.getEnd() == Ending.VICTORY || playerTree.data.getEnd() == Ending.FAILURE);}
+    public boolean isRiddle() {return (playerTree.data.getEnd() == Ending.RIDDLE);}
 }

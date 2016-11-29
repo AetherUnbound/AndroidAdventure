@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Restarting Adventure...", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                AdventureFragment frag = (AdventureFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+                AdventureFragment frag = (AdventureFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
                 AdventureFragment.restartAdventure(frag);
             }
         });
@@ -82,6 +86,13 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer.setLooping(true);
             mediaPlayer.start();
         }
+
+        AdventureFragment adventureFragment = new AdventureFragment();
+        RiddleFragment riddleFragment = new RiddleFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.add(R.id.fragment_container, adventureFragment).commit();
 
 
     }
@@ -176,4 +187,16 @@ public class MainActivity extends AppCompatActivity {
         TRACK = track;
         resumeMusic();
     }
+
+    public static int getDIFFICULTY_LEVEL(MainActivity activity) {
+        return activity.DIFFICULTY_LEVEL;
+    }
+
+    public void replaceAdventureFragmentWithRiddle(RiddleFragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+                .addToBackStack(null).commit();
+    }
+
+
 }

@@ -1,11 +1,14 @@
 package com.example.liet_kynes.androidadventure;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,6 +20,9 @@ public class AdventureFragment extends Fragment {
     private static final String TAG = "MAIN_FRAGMENT_DEBUG";
     public static final String PLAYER_POSITION = "PLAYER_POSITION";
     private Adventure ADVENTURE;
+    Animation fadeInAnimation;
+    Animation fadeOutAnimation;
+    Animation buttonFadeAnimation;
 
     public AdventureFragment() {
 
@@ -28,10 +34,16 @@ public class AdventureFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_main, container, false); //It breaks if we don't have View view = in here
 
+        //Animation
+        fadeInAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in_animation);
+        buttonFadeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.button_alpha);
+        fadeOutAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out_animation);
+
         //Items for main fragment
         final TextView storyTextView = (TextView) view.findViewById(R.id.storyTextView);
         final Button choiceOneButton = (Button) view.findViewById(R.id.choiceOneButton);
         final Button choiceTwoButton = (Button) view.findViewById(R.id.choiceTwoButton);
+
         ADVENTURE = new Adventure(getActivity().getApplicationContext(), storyTextView, choiceOneButton, choiceTwoButton);
 
         if(savedInstanceState == null) {
@@ -59,6 +71,11 @@ public class AdventureFragment extends Fragment {
             public void onClick(View v) {
                 //Temporarily testing out fragment launching
 
+                //choiceTwoButton.startAnimation(fadeOutAnimation); This made things weird. Not a good way weird.
+                //choiceOneButton.startAnimation(fadeOutAnimation);
+                storyTextView.startAnimation(fadeOutAnimation);
+
+                //storyTextView.setVisibility(View.INVISIBLE); Matt, this is the code to use to transition easier.
                 ADVENTURE.setNewLocation("choice1");
             }
         });
@@ -66,6 +83,9 @@ public class AdventureFragment extends Fragment {
         choiceTwoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //choiceTwoButton.startAnimation(fadeOutAnimation); This made things weird. Not a good way weird.
+                //choiceOneButton.startAnimation(fadeOutAnimation);
+                storyTextView.startAnimation(fadeOutAnimation);
                 ADVENTURE.setNewLocation("choice2");
             }
         });

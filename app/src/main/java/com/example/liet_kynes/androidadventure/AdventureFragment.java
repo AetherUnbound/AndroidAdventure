@@ -12,13 +12,13 @@ import android.widget.TextView;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class AdventureFragment extends Fragment {
 
     private static final String TAG = "MAIN_FRAGMENT_DEBUG";
     public static final String PLAYER_POSITION = "PLAYER_POSITION";
     private Adventure ADVENTURE;
 
-    public MainActivityFragment() {
+    public AdventureFragment() {
 
     }
 
@@ -57,6 +57,8 @@ public class MainActivityFragment extends Fragment {
         choiceOneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Temporarily testing out fragment launching
+
                 ADVENTURE.setNewLocation("choice1");
             }
         });
@@ -80,7 +82,7 @@ public class MainActivityFragment extends Fragment {
         outState.putInt(PLAYER_POSITION, ADVENTURE.getPlayerPosition());
     }
 
-    public static void restartAdventure(MainActivityFragment fragment) {
+    public static void restartAdventure(AdventureFragment fragment) {
         fragment.ADVENTURE.restartAdventure();
     }
 }

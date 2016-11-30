@@ -21,7 +21,8 @@ public class AdventureFragment extends Fragment {
     private static final String TAG = "MAIN_FRAGMENT_DEBUG";
     public static final String PLAYER_POSITION = "PLAYER_POSITION";
     public static final String DIFFICULTY_LEVEL = "DIFFICULTY_LEVEL";
-    public static final String TAG_RIDDLE_FRAGMENT = "RIDDLE_FRAGMENT";
+    public static final String RIDDLE_CONTEXT = "RIDDLE_CONTEXT";
+    public static final String RIDDLE_RESULT = "RIDDLE_RESULT";
     public static final int GET_RIDDLE_RESULT = 0;
     private String choice = "";
     private Adventure ADVENTURE;
@@ -63,14 +64,14 @@ public class AdventureFragment extends Fragment {
                     ADVENTURE.setNewLocation(choice);
                     if (ADVENTURE.isRiddle()) {
 //                        launch riddle activity
-                        launchRiddle(((MainActivity)getActivity()).getDIFFICULTY_LEVEL());
+                        launchRiddle(((MainActivity)getActivity()).getDIFFICULTY_LEVEL(), ADVENTURE.getRiddleString());
                     }
                     else if(ADVENTURE.isVictory()){
                         //Nate, these will also be given strings but if you get down the basic
                         // code we can add that in later
                         launchEnding(true);
                     }
-                    else if(!ADVENTURE.isVictory()){
+                    else if(ADVENTURE.isFailure()){
                         launchEnding(false);
                     }
 //                    ADVENTURE.setNewLocation(choice);
@@ -170,11 +171,12 @@ public class AdventureFragment extends Fragment {
         fragment.ADVENTURE.restartAdventure();
     }
 
-    private void launchRiddle(int difficulty) {
+    private void launchRiddle(int difficulty, String riddleContext) {
         //pass difficulty into intent as extra
         Intent toRiddle = new Intent(getActivity(), RiddleActivity.class);
         toRiddle.putExtra(DIFFICULTY_LEVEL, difficulty);
-        startActivityForResult(toRiddle, GET_RIDDLE_RESULT);
+        toRiddle.putExtra(RIDDLE_CONTEXT, riddleContext);
+        startActivityForResult(toRiddle, MainActivity.REQUEST_CODE_RIDDLE);
 
 //        int diff = activity.getDIFFICULTY_LEVEL();
 //        RiddleFragment riddleFragment = new RiddleFragment();
@@ -189,5 +191,16 @@ public class AdventureFragment extends Fragment {
 
     }
 
+    protected void onRiddleResult(Intent data) {
+        boolean passed = data.getBooleanExtra(RIDDLE_RESULT, false); //so if the code fails they fail MUAHAHAHAHA
+        if(passed) {
+            //how do we access the button here so we can advance the thing?
+            //maybe a direct access will work
+            ADVENTURE.setNewLocation("choice1");
+        }
+        else {
+            ADVENTURE.setNewLocation("choice2");
+        }
+    }
 
 }

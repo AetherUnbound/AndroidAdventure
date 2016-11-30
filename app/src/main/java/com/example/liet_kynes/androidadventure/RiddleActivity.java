@@ -3,17 +3,21 @@ package com.example.liet_kynes.androidadventure;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import static com.example.liet_kynes.androidadventure.AdventureFragment.DIFFICULTY_LEVEL;
+import static com.example.liet_kynes.androidadventure.AdventureFragment.RIDDLE_CONTEXT;
 
 public class RiddleActivity extends AppCompatActivity {
     //Variables
     private int difficulty;
-    public boolean correct = false; //Default to incorrect
+    private String riddleContext;
+    private boolean correct = false; //Default to incorrect
+    private int correctIndex;
+    private Riddle RIDDLE;
+    private final String TAG = "RIDDLE_DEBUG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,20 @@ public class RiddleActivity extends AppCompatActivity {
         //Get the data from the intent
         Intent fromAdventure = getIntent();
         difficulty = fromAdventure.getIntExtra(DIFFICULTY_LEVEL, 0); //Is default 0?
+        riddleContext = fromAdventure.getStringExtra(RIDDLE_CONTEXT);
+        RIDDLE = new Riddle();
+
+        try {
+            correctIndex = RIDDLE.createRiddle(this.getApplicationContext(), riddleTextView, choiceOneButton, choiceTwoButton, choiceThreeButton, choiceFourButton, difficulty, riddleContext);
+            if(correctIndex < 0) {
+                throw new RuntimeException("No answer found");
+            }
+        }
+        catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        }
+
+
 
         //Code to populate the layout with the riddle and return to AdventureFragment;
     }

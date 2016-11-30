@@ -37,12 +37,32 @@
             <node text="You make your way to the entrance of the cave and realize that it is not raining at all but small rocks rolling down. As you get outside, you see small mountain goats climbing above the mouth of the cave. In the distance, you see a castle.">
                 <choice1 text="Head towards the goats">
                     <node text="You climb up towards the goats. They scatter and run away. As you are climbing, your footing slips, and you begin to slide. You fall off the edge of a cliff and die.">
-                        <riddle/>
+                        <ending outcome="failure"/>
                     </node>
                 </choice1>
                 <choice2 text="Make your way down towards the castle">
                     <node text="You make your way down to the bottom of the mountain, and at the bottom is a wizard sitting on a stump. He stands up, four feet tall, and says 'So, you made it out of the cave. But can you solve this riddle?">
-                        <riddle/>
+                        <riddle>
+                            <choice1>
+                                <node text="You beat death. Now you have a choice to show him mercy or spare him">
+                                    <choice1 text="Show him mercy">
+                                        <node text="He takes this advantage to kill you permanently">
+                                            <ending outome="failure"/>
+                                        </node>
+                                    </choice1>
+                                    <choice2 text="Kill Death">
+                                        <node text="While it makes a great metal band name, this proves impossible">
+                                            <ending outcome="failure"/>
+                                        </node>
+                                    </choice2>
+                                </node>
+                            </choice1>
+                            <choice2>
+                                <node text="Death destroys you">
+                                    <ending outcome="failure"/>
+                                </node>
+                            </choice2>
+                        </riddle>
                     </node>
                 </choice2>
             </node>

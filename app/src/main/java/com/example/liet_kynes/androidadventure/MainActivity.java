@@ -4,13 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,8 +25,11 @@ public class MainActivity extends AppCompatActivity {
     public static String EXTRA_MAIN_SONG = "com.example.lietkynes.androidadventure.main_song";
     public static String EXTRA_MAIN_NIGHT_MODE = "com.example.lietkynes.androidadventure.main_night_mode";
     public static String EXTRA_MAIN_DIFF_LEVEL = "com.example.lietkynes.androidadventure.main_diff_level";
-    private static final int REQUEST_SONG_CHANGE = 0;
-    private static String TAG = "DEBUG";
+    public static final int REQUEST_CODE_SETTINGS = 0;
+    public static final int REQUEST_CODE_RIDDLE = 1;
+    public static final int REQUEST_CODE_VICTORY = 2;
+    public static final int REQUEST_CODE_FAILURE = 3;
+    public static String TAG = "DEBUG";
     public int getDIFFICULTY_LEVEL() { return DIFFICULTY_LEVEL; }
     //Variables and their default values
     private int DIFFICULTY_LEVEL = 0;
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra(EXTRA_MAIN_DIFF_LEVEL, DIFFICULTY_LEVEL); //Default difficulty is 4, for text input only
             i.putExtra(EXTRA_MAIN_NIGHT_MODE, IS_NIGHT_MODE); //This may be harder to do than I originally thought, but I'm giving it a shot
 
-            startActivityForResult(i, REQUEST_SONG_CHANGE); //I'm not 100% sure this is proper form, but it works
+            startActivityForResult(i, REQUEST_CODE_SETTINGS); //I'm not 100% sure this is proper form, but it works
 
             return true;
         }
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (requestCode == REQUEST_SONG_CHANGE){
+        if (requestCode == REQUEST_CODE_SETTINGS){
             if (data == null)
                 return; //Default case; nothing changed
 
@@ -154,7 +154,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //Difficulty level
-            if (data.getIntExtra(EXTRA_MAIN_DIFF_LEVEL, 4) != 4){
+            int diff = data.getIntExtra(EXTRA_MAIN_DIFF_LEVEL, 4);
+            if (diff != DIFFICULTY_LEVEL){
+                DIFFICULTY_LEVEL = diff;
                 //Code to change the difficulty level
             }
 
@@ -165,7 +167,10 @@ public class MainActivity extends AppCompatActivity {
             if (!data.getBooleanExtra(EXTRA_MAIN_SOUND, true)){
                 IS_PLAYING = false;
             }
+        }
 
+        else if (requestCode == REQUEST_CODE_RIDDLE) {
+            AdventureFragment fragment = (AdventureFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 
         }
 

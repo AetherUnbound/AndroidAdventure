@@ -14,7 +14,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="287dp">
+        android:layout_weight="1"
+        android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="match_parent"
@@ -26,12 +27,13 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="match_parent">
 
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
-            android:layout_height="173dp"
+            android:layout_height="wrap_content"
             android:id="@+id/lossTextView" />
     </LinearLayout>
 </LinearLayout>

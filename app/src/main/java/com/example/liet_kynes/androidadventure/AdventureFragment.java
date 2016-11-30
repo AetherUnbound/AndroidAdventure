@@ -59,7 +59,15 @@ public class AdventureFragment extends Fragment {
                     ADVENTURE.setNewLocation(choice);
                     if (ADVENTURE.isRiddle()) {
 //                        launch riddle activity
-                        launchRiddle((MainActivity)getActivity());
+                        launchRiddle(((MainActivity)getActivity()).getDIFFICULTY_LEVEL());
+                    }
+                    else if(ADVENTURE.isVictory()){
+                        //Nate, these will also be given strings but if you get down the basic
+                        // code we can add that in later
+                        launchEnding(true);
+                    }
+                    else if(!ADVENTURE.isVictory()){
+                        launchEnding(false);
                     }
 //                    ADVENTURE.setNewLocation(choice);
                 storyTextView.startAnimation(fadeInAnimation);
@@ -158,14 +166,21 @@ public class AdventureFragment extends Fragment {
         fragment.ADVENTURE.restartAdventure();
     }
 
-    private void launchRiddle(MainActivity activity) {
-        int diff = activity.getDIFFICULTY_LEVEL();
+    private void launchRiddle(int difficulty) {
+        //pass difficulty into intent as extra
+
+
+//        int diff = activity.getDIFFICULTY_LEVEL();
 //        RiddleFragment riddleFragment = new RiddleFragment();
 //        activity.replaceAdventureFragmentWithRiddle(riddleFragment);
 //        this.getChildFragmentManager().beginTransaction()
 //                .replace(R.id.fragment_container, riddleFragment, TAG_RIDDLE_FRAGMENT)
 //                .addToBackStack(null)
 //                .commit();
+    }
+
+    private void launchEnding(boolean victory) {
+
     }
 
 

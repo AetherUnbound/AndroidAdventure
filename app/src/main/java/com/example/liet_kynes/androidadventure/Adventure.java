@@ -230,6 +230,7 @@ public class Adventure {
         choice2Button.setText(playerTree.data.getChoice2());
     }
 
-    public boolean isEnding() {return (playerTree.data.getEnd() == Ending.VICTORY || playerTree.data.getEnd() == Ending.FAILURE);}
     public boolean isRiddle() {return (playerTree.data.getEnd() == Ending.RIDDLE);}
+    public boolean isVictory() {return (playerTree.data.getEnd() == Ending.VICTORY);}
+    public boolean isFailure() {return (playerTree.data.getEnd() == Ending.FAILURE);}
 }

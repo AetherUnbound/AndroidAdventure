@@ -22,6 +22,7 @@ public class AdventureFragment extends Fragment {
     public static final String PLAYER_POSITION = "PLAYER_POSITION";
     public static final String DIFFICULTY_LEVEL = "DIFFICULTY_LEVEL";
     public static final String TAG_RIDDLE_FRAGMENT = "RIDDLE_FRAGMENT";
+    public static final int GET_RIDDLE_RESULT = 0;
     private String choice = "";
     private Adventure ADVENTURE;
     Animation fadeInAnimation;
@@ -173,7 +174,7 @@ public class AdventureFragment extends Fragment {
         //pass difficulty into intent as extra
         Intent toRiddle = new Intent(getActivity(), RiddleActivity.class);
         toRiddle.putExtra(DIFFICULTY_LEVEL, difficulty);
-        startActivity(toRiddle);
+        startActivityForResult(toRiddle, GET_RIDDLE_RESULT);
 
 //        int diff = activity.getDIFFICULTY_LEVEL();
 //        RiddleFragment riddleFragment = new RiddleFragment();

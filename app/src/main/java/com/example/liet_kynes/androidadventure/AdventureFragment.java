@@ -20,6 +20,7 @@ public class AdventureFragment extends Fragment {
     private static final String TAG = "MAIN_FRAGMENT_DEBUG";
     public static final String PLAYER_POSITION = "PLAYER_POSITION";
     public static final String TAG_RIDDLE_FRAGMENT = "RIDDLE_FRAGMENT";
+    private String choice = "";
     private Adventure ADVENTURE;
     Animation fadeInAnimation;
     Animation fadeOutAnimation;
@@ -45,7 +46,42 @@ public class AdventureFragment extends Fragment {
         final Button choiceOneButton = (Button) view.findViewById(R.id.choiceOneButton);
         final Button choiceTwoButton = (Button) view.findViewById(R.id.choiceTwoButton);
 
-        ADVENTURE = new Adventure(getActivity().getApplicationContext(), storyTextView, choiceOneButton, choiceTwoButton);
+
+        ADVENTURE = new Adventure(getActivity().getApplicationContext(), storyTextView, choiceOneButton, choiceTwoButton, getActivity());
+
+        fadeOutAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) { }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                storyTextView.setVisibility(View.INVISIBLE); //Matt, this is the code to use to transition easier.
+                if(choice.equals("choice1") || choice.equals("choice2"))
+                    ADVENTURE.setNewLocation(choice);
+                    if (ADVENTURE.isRiddle()) {
+//                        launch riddle activity
+                        launchRiddle((MainActivity)getActivity());
+                    }
+//                    ADVENTURE.setNewLocation(choice);
+                storyTextView.startAnimation(fadeInAnimation);
+                choiceTwoButton.startAnimation(fadeInAnimation);
+                choiceOneButton.startAnimation(fadeInAnimation);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+
+        fadeInAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) { }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                storyTextView.setVisibility(View.VISIBLE);
+                choiceOneButton.setVisibility(View.VISIBLE);
+                choiceTwoButton.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
 
         if(savedInstanceState == null) {
             try {
@@ -72,17 +108,20 @@ public class AdventureFragment extends Fragment {
             public void onClick(View v) {
                 //Temporarily testing out fragment launching
 
-                //choiceTwoButton.startAnimation(fadeOutAnimation); This made things weird. Not a good way weird.
-                //choiceOneButton.startAnimation(fadeOutAnimation);
+                choiceTwoButton.startAnimation(fadeOutAnimation); //This made things weird. Not a good way weird.
+                choiceOneButton.startAnimation(fadeOutAnimation);
+                choice = "choice1";
                 storyTextView.startAnimation(fadeOutAnimation);
 
-                //storyTextView.setVisibility(View.INVISIBLE); Matt, this is the code to use to transition easier.
-                ADVENTURE.setNewLocation("choice1");
-                if(ADVENTURE.isRiddle()) {
-                    //launch riddle activity
-                    launchRiddle();
+//                if(fadeOutAnimation.hasEnded()) {
+//                    ADVENTURE.setNewLocation("choice1");
+//                    if (ADVENTURE.isRiddle()) {
+//                        launch riddle activity
+//                        launchRiddle();
+//                    }
+//                    storyTextView.setVisibility(View.VISIBLE);
                 }
-            }
+//            }
         });
 
         choiceTwoButton.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +129,10 @@ public class AdventureFragment extends Fragment {
             public void onClick(View v) {
                 //choiceTwoButton.startAnimation(fadeOutAnimation); This made things weird. Not a good way weird.
                 //choiceOneButton.startAnimation(fadeOutAnimation);
+                choice = "choice2";
                 storyTextView.startAnimation(fadeOutAnimation);
-                ADVENTURE.setNewLocation("choice2");
+
+//                ADVENTURE.setNewLocation("choice2");
             }
         });
 
@@ -113,15 +154,16 @@ public class AdventureFragment extends Fragment {
     }
 
     public static void restartAdventure(AdventureFragment fragment) {
+        fragment.choice = "root";
         fragment.ADVENTURE.restartAdventure();
     }
 
-    private void launchRiddle() {
-        int diff = MainActivity.getDIFFICULTY_LEVEL((MainActivity)getActivity());
+    private void launchRiddle(MainActivity activity) {
+        int diff = activity.getDIFFICULTY_LEVEL();
         RiddleFragment riddleFragment = new RiddleFragment();
-        ((MainActivity) getActivity()).replaceAdventureFragmentWithRiddle(riddleFragment);
+        activity.replaceAdventureFragmentWithRiddle(riddleFragment);
 //        this.getChildFragmentManager().beginTransaction()
-//                .replace(R.id.fragment_riddle, riddleFragment, TAG_RIDDLE_FRAGMENT)
+//                .replace(R.id.fragment_container, riddleFragment, TAG_RIDDLE_FRAGMENT)
 //                .addToBackStack(null)
 //                .commit();
     }

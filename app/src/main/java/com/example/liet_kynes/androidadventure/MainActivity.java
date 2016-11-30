@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public static String EXTRA_MAIN_DIFF_LEVEL = "com.example.lietkynes.androidadventure.main_diff_level";
     private static final int REQUEST_SONG_CHANGE = 0;
     private static String TAG = "DEBUG";
+    public int getDIFFICULTY_LEVEL() { return DIFFICULTY_LEVEL; }
     //Variables and their default values
     private int DIFFICULTY_LEVEL = 0;
     private int TRACK = R.raw.ambient_cave;
@@ -71,8 +73,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Restarting Adventure...", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                AdventureFragment frag = (AdventureFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-                AdventureFragment.restartAdventure(frag);
+                //This code ensures that pressing the FAB from a fragment that's not the main screen
+                // doesn't crash the app
+                Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                if(frag instanceof AdventureFragment) {
+                    AdventureFragment advFrag = (AdventureFragment)frag;
+                    AdventureFragment.restartAdventure(advFrag);
+                }
             }
         });
 
@@ -186,10 +193,6 @@ public class MainActivity extends AppCompatActivity {
         }
         TRACK = track;
         resumeMusic();
-    }
-
-    public static int getDIFFICULTY_LEVEL(MainActivity activity) {
-        return activity.DIFFICULTY_LEVEL;
     }
 
     public void replaceAdventureFragmentWithRiddle(RiddleFragment fragment) {

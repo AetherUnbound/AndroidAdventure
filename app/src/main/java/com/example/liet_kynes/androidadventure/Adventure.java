@@ -5,7 +5,10 @@ package com.example.liet_kynes.androidadventure;
  */
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,7 +20,7 @@ import java.io.IOException;
 
 //Class declaration of "Adventure"
 public class Adventure {
-    private static final String TAG = "ADVENTURE_DEBUT";
+    private static final String TAG = "ADVENTURE_DEBUG";
 
     //Enumeration for endings
     private enum Ending {
@@ -160,11 +163,16 @@ public class Adventure {
     private Button choice1Button; //Button for choice 1 on parent
     private Button choice2Button; //Button for choice 2 on parent
 
-    Adventure(Context context, TextView storyTV, Button c1Button, Button c2Button) {
+    private Animation fadeInAnimation;
+    private Animation fadeOutAnimation;
+
+    Adventure(Context context, TextView storyTV, Button c1Button, Button c2Button, FragmentActivity activity) {
         this.parentContext = context;
         this.storyTextView = storyTV;
         this.choice1Button = c1Button;
         this.choice2Button = c2Button;
+        this.fadeInAnimation = AnimationUtils.loadAnimation(activity, R.anim.fade_in_animation);
+        this.fadeOutAnimation = AnimationUtils.loadAnimation(activity, R.anim.fade_out_animation);
     }
 
 

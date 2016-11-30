@@ -1,6 +1,7 @@
 package com.example.liet_kynes.androidadventure;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,12 +20,14 @@ public class AdventureFragment extends Fragment {
 
     private static final String TAG = "MAIN_FRAGMENT_DEBUG";
     public static final String PLAYER_POSITION = "PLAYER_POSITION";
+    public static final String DIFFICULTY_LEVEL = "DIFFICULTY_LEVEL";
     public static final String TAG_RIDDLE_FRAGMENT = "RIDDLE_FRAGMENT";
     private String choice = "";
     private Adventure ADVENTURE;
     Animation fadeInAnimation;
     Animation fadeOutAnimation;
     Animation buttonFadeAnimation;
+
 
     public AdventureFragment() {
 
@@ -168,7 +171,9 @@ public class AdventureFragment extends Fragment {
 
     private void launchRiddle(int difficulty) {
         //pass difficulty into intent as extra
-
+        Intent toRiddle = new Intent(getActivity(), RiddleActivity.class);
+        toRiddle.putExtra(DIFFICULTY_LEVEL, difficulty);
+        startActivity(toRiddle);
 
 //        int diff = activity.getDIFFICULTY_LEVEL();
 //        RiddleFragment riddleFragment = new RiddleFragment();

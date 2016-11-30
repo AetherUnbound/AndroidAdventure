@@ -41,8 +41,8 @@
                     </node>
                 </choice1>
                 <choice2 text="Make your way down towards the castle">
-                    <node text="You make your way down to the bottom of the mountain, and at the bottom is a ">
-                        <ending outcome="failure"/>
+                    <node text="You make your way down to the bottom of the mountain, and at the bottom is a wizard sitting on a stump. He stands up, four feet tall, and says 'So, you made it out of the cave. But can you solve this riddle?">
+                        <riddle/>
                     </node>
                 </choice2>
             </node>

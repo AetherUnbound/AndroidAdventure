@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         AdventureFragment adventureFragment = new AdventureFragment();
-        RiddleFragment riddleFragment = new RiddleFragment();
+//        RiddleFragment riddleFragment = new RiddleFragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -195,11 +195,11 @@ public class MainActivity extends AppCompatActivity {
         resumeMusic();
     }
 
-    public void replaceAdventureFragmentWithRiddle(RiddleFragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
-                .addToBackStack(null).commit();
-    }
+//    public void replaceAdventureFragmentWithRiddle(RiddleFragment fragment) {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+//                .addToBackStack(null).commit();
+//    }
 
 
 }

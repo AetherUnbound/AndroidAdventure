@@ -160,12 +160,13 @@ public class AdventureFragment extends Fragment {
 
     private void launchRiddle(MainActivity activity) {
         int diff = activity.getDIFFICULTY_LEVEL();
-        RiddleFragment riddleFragment = new RiddleFragment();
-        activity.replaceAdventureFragmentWithRiddle(riddleFragment);
+//        RiddleFragment riddleFragment = new RiddleFragment();
+//        activity.replaceAdventureFragmentWithRiddle(riddleFragment);
 //        this.getChildFragmentManager().beginTransaction()
 //                .replace(R.id.fragment_container, riddleFragment, TAG_RIDDLE_FRAGMENT)
 //                .addToBackStack(null)
 //                .commit();
     }
+
 
 }

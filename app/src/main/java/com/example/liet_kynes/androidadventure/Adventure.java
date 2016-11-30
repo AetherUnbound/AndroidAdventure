@@ -124,6 +124,18 @@ public class Adventure {
             }
             else if(child1.getNodeName().equals("riddle")) {
                 tree.data.setEnd(Ending.RIDDLE);
+                child1 = getFirstChildElement(rootNode);
+                //continue building tree
+                if(child1.getNodeName().equals("choice1")) {
+                    //no need to set data
+                    tree.leftChild = buildBranch(getFirstChildElement(child1));
+                    Element child2 = getLastChildElement(rootNode);
+                    if(!child2.getNodeName().equals("choice2")) {
+                        throw new RuntimeException("Choice 2 not found when expected"); //sanity check
+                    }
+                    tree.rightChild = buildBranch(getFirstChildElement(child2));
+                }
+
             }
             return tree;
         }
@@ -152,6 +164,14 @@ public class Adventure {
 
             // not found
             return null;
+        }
+
+        //I made this one
+        private Element getNextSiblingElement(Node node) {
+            node = node.getNextSibling();
+            while (node != null && node.getNodeType() != Node.ELEMENT_NODE)
+                node = node.getNextSibling();
+            return (Element)node;
         }
     }
 
@@ -233,4 +253,5 @@ public class Adventure {
     public boolean isRiddle() {return (playerTree.data.getEnd() == Ending.RIDDLE);}
     public boolean isVictory() {return (playerTree.data.getEnd() == Ending.VICTORY);}
     public boolean isFailure() {return (playerTree.data.getEnd() == Ending.FAILURE);}
+    public String getRiddleString() {return playerTree.data.text;}
 }

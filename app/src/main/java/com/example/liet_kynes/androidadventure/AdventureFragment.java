@@ -13,6 +13,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.example.liet_kynes.androidadventure.MainActivity.REQUEST_CODE_RIDDLE;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -176,7 +178,7 @@ public class AdventureFragment extends Fragment {
         Intent toRiddle = new Intent(getActivity(), RiddleActivity.class);
         toRiddle.putExtra(DIFFICULTY_LEVEL, difficulty);
         toRiddle.putExtra(RIDDLE_CONTEXT, riddleContext);
-        startActivityForResult(toRiddle, MainActivity.REQUEST_CODE_RIDDLE);
+        getActivity().startActivityForResult(toRiddle, REQUEST_CODE_RIDDLE);
 
 //        int diff = activity.getDIFFICULTY_LEVEL();
 //        RiddleFragment riddleFragment = new RiddleFragment();

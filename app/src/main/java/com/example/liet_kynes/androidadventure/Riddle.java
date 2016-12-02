@@ -59,7 +59,7 @@ public class Riddle {
         for (int i = 0; i < choices.getLength(); i++) {
             if (choices.item(i).hasAttributes()) {
                 //i.e. if it is the answer
-                answer = i;
+                answer = i + 1;
             }
             buttonArray[i].setText(choices.item(i).getFirstChild().getNodeValue());
         }

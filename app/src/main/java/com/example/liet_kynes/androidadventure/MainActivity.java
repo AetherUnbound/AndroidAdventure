@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
         else if (requestCode == REQUEST_CODE_RIDDLE) {
             AdventureFragment fragment = (AdventureFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-
+            fragment.onRiddleResult(data);
         }
 
         super.onActivityResult(requestCode, resultCode, data);

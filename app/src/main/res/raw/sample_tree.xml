@@ -47,7 +47,7 @@
                                 <node text="You beat death. Now you have a choice to show him mercy or spare him">
                                     <choice1 text="Show him mercy">
                                         <node text="He takes this advantage to kill you permanently">
-                                            <ending outome="failure"/>
+                                            <ending outcome="failure"/>
                                         </node>
                                     </choice1>
                                     <choice2 text="Kill Death">

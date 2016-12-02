@@ -3,7 +3,7 @@
     <difficulty0>
         <riddle>
             <text>I cover cities and destroy mountains,
-             I make men blind, yet help them see.</text>
+ I make men blind, yet help them see.</text>
             <choice>Dirt</choice>
             <choice answer="correct">Sand</choice>
             <choice>Water</choice>
@@ -11,13 +11,13 @@
         </riddle>
         <riddle>
             <text>Of no use to one
-                Yet absolute bliss to two.
-                The small boy gets it for nothing.
-                The young man has to lie for it.
-                The old man has to buy it.</text>
+ Yet absolute bliss to two.
+ The small boy gets it for nothing.
+ The young man has to lie for it.
+ The old man has to buy it.</text>
             <choice>Money</choice>
-            <choice answer="correct">Candy</choice>
-            <choice>A Kiss</choice>
+            <choice>Candy</choice>
+            <choice answer="correct">A Kiss</choice>
             <choice>A House</choice>
         </riddle>
     </difficulty0>
@@ -31,9 +31,9 @@
         </riddle>
         <riddle>
             <text>You play with me at night before going to sleep.
-                You can’t get caught fiddling with me at work.
-                You only let a select few people touch me.
-                What am I?
+ You can’t get caught fiddling with me at work.
+ You only let a select few people touch me.
+ What am I?
             </text>
             <choice>Unmentionable</choice>
             <choice answer="correct">Phone</choice>
@@ -44,9 +44,9 @@
     <difficulty2>
         <riddle>
             <text>You will always find me in the past.
-                I can be created in the present,
-                but the future can never taint me.
-                What am I?
+ I can be created in the present,
+ but the future can never taint me.
+ What am I?
             </text>
             <choice>Memories</choice>
             <choice>Photographs</choice>

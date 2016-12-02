@@ -124,6 +124,7 @@ public class Adventure {
             }
             else if(child1.getNodeName().equals("riddle")) {
                 tree.data.setEnd(Ending.RIDDLE);
+                rootNode = getFirstChildElement(rootNode); //set root to riddle node
                 child1 = getFirstChildElement(rootNode);
                 //continue building tree
                 if(child1.getNodeName().equals("choice1")) {

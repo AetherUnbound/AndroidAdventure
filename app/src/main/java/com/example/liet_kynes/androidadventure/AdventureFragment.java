@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.liet_kynes.androidadventure.MainActivity.REQUEST_CODE_RIDDLE;
 
@@ -199,9 +200,11 @@ public class AdventureFragment extends Fragment {
             //how do we access the button here so we can advance the thing?
             //maybe a direct access will work
             ADVENTURE.setNewLocation("choice1");
+            Toast.makeText(getActivity().getApplicationContext(), "Riddle Passed", Toast.LENGTH_LONG).show();
         }
         else {
             ADVENTURE.setNewLocation("choice2");
+            Toast.makeText(getActivity().getApplicationContext(), "Riddle Failed", Toast.LENGTH_LONG).show();
         }
     }
 

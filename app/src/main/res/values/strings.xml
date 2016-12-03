@@ -40,7 +40,7 @@
         <item>@string/diff_easy</item>
         <item>@string/diff_medium</item>
         <item>@string/diff_hard</item>
-        <item>@string/diff_text_input</item>
+        <!--<item>@string/diff_text_input</item>-->
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

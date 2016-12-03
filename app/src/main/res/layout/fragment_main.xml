@@ -37,7 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/choiceOneButton"
-            android:visibility="gone"
             android:textSize="18sp" />
 
         <Button
@@ -45,7 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/choiceTwoButton"
-            android:visibility="gone"
             android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

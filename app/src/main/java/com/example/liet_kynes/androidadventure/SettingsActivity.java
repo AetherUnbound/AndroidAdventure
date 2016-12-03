@@ -98,8 +98,16 @@ public class SettingsActivity extends AppCompatActivity {
                 track = getMP3ResourceValue(position);
             }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        difficultySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                difficulty = position;
             }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
     }

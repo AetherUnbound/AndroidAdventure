@@ -5,6 +5,7 @@
     android:id="@+id/activity_victory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -22,7 +23,12 @@
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/victoryTextView" />
+            android:textColor="@color/winText"
+            android:id="@+id/victoryTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"

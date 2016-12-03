@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
             if (diff != DIFFICULTY_LEVEL){
                 DIFFICULTY_LEVEL = diff;
                 //Code to change the difficulty level
+                Toast.makeText(MainActivity.this, "Riddle Difficulty Changed", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -169,6 +170,20 @@ public class MainActivity extends AppCompatActivity {
         else if (requestCode == REQUEST_CODE_RIDDLE) {
             AdventureFragment fragment = (AdventureFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             fragment.onRiddleResult(data);
+        }
+
+        else if (requestCode == REQUEST_CODE_FAILURE || requestCode == REQUEST_CODE_VICTORY) {
+            Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            String toastString;
+            if(frag instanceof AdventureFragment) {
+                AdventureFragment advFrag = (AdventureFragment)frag;
+                AdventureFragment.restartAdventure(advFrag);
+            }
+            if(requestCode == REQUEST_CODE_FAILURE)
+                toastString = "Try to do better this time...";
+            else
+                toastString = "Try to win again!";
+            Toast.makeText(MainActivity.this, toastString, Toast.LENGTH_LONG).show();
         }
 
         super.onActivityResult(requestCode, resultCode, data);

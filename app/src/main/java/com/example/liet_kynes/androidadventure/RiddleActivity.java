@@ -24,6 +24,20 @@ public class RiddleActivity extends AppCompatActivity {
     private static MediaPlayer mediaPlayer;
 
 
+    protected void pauseMusic() { mediaPlayer.pause(); }
+    protected void resumeMusic() { if (!mediaPlayer.isPlaying()) mediaPlayer.start(); }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        pauseMusic();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        resumeMusic();
+    }
 
 
     @Override
@@ -45,7 +59,7 @@ public class RiddleActivity extends AppCompatActivity {
         RIDDLE = new Riddle();
 
         //Play some meditative music (or stressful)
-        mediaPlayer = MediaPlayer.create(this, R.raw.nightmare); //If we're going to play the same music per song, this can be hard coded.
+        mediaPlayer = MediaPlayer.create(this, R.raw.riddle_music); //If we're going to play the same music per song, this can be hard coded.
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
 

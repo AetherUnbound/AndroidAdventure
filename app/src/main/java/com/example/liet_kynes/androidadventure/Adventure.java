@@ -5,8 +5,10 @@ package com.example.liet_kynes.androidadventure;
  */
 
 import android.content.Context;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -271,8 +273,9 @@ public class Adventure {
         choice2Button.startAnimation(fadeOutAnimation);
     }
 
+
     public boolean isRiddle() {return (playerTree.data.getEnd() == Ending.RIDDLE);}
     public boolean isVictory() {return (playerTree.data.getEnd() == Ending.VICTORY);}
     public boolean isFailure() {return (playerTree.data.getEnd() == Ending.FAILURE);}
-    public String getRiddleString() {return playerTree.data.text;}
+    public String getCurrentTextString() {return playerTree.data.text;}
 }

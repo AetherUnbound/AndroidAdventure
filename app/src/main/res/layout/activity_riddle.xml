@@ -18,9 +18,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAlignment="center"
             android:id="@+id/riddleTextView"
-            android:textSize="20sp" />
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="20sp"
+            android:textAlignment="center" />
 
     </ScrollView>
 

@@ -11,7 +11,7 @@
                             </node>
                         </choice1>
                         <choice2 text="Investigate the crack">
-                            <node text="You notice a gold treasure hidden in the folds">
+                            <node text="You notice a gold treasure hidden in the folds. Upon touching it, you suddenly wake up from your warm bed to find that you've become the richest man in the world!">
                                 <ending outcome="victory"/>
                             </node>
                         </choice2>
@@ -19,13 +19,13 @@
                 </choice1>
                 <choice2 text="Go down the stairs deeper into the cave">
                     <node text="You begin to descend the stairs, wondering who or what carved them into the stone. You hear more noises echoing off the walls. When you reach the bottom of the stairs, you are in a long room. You are amazed at how tall the ceiling is. There are several doors in the hall, and a gate at the other side.">
-                        <choice1 text="Open the first door you reach in the room.">
-                            <node text="Placeholder">
+                        <choice1 text="Open the first door you reach in the room">
+                            <node text="You enter the halls of Valhalla, and are greeted with the roaring cheers of your fellows!">
                                 <ending outcome="victory"/>
                             </node>
                         </choice1>
                         <choice2 text="Make your way to the gate at the end of the hall">
-                            <node text="Placeholder">
+                            <node text="You fall into a trap pit and the spikes at the bottom impale your legs. Immobilized by pain, you try for hours to call out to no avail...">
                                 <ending outcome="failure"/>
                             </node>
                         </choice2>
@@ -44,21 +44,21 @@
                     <node text="You make your way down to the bottom of the mountain, and at the bottom is a wizard sitting on a stump. He stands up, four feet tall, and says 'So, you made it out of the cave. But can you solve this riddle?">
                         <riddle>
                             <choice1>
-                                <node text="You beat death. Now you have a choice to show him mercy or spare him">
+                                <node text="You beat the wizards, who was actually Death in disguise. Now you have a choice to show him mercy or spare him.">
                                     <choice1 text="Show him mercy">
-                                        <node text="He takes this advantage to kill you permanently">
+                                        <node text="'HA, you stupid fool!' he says as he proceeds to kill you permanently">
                                             <ending outcome="failure"/>
                                         </node>
                                     </choice1>
                                     <choice2 text="Kill Death">
-                                        <node text="While it makes a great metal band name, this proves impossible">
+                                        <node text="While it makes a great metal band name, this proves impossible. Death laughs in your face as he sends you down the corridors to annihilation.">
                                             <ending outcome="failure"/>
                                         </node>
                                     </choice2>
                                 </node>
                             </choice1>
                             <choice2>
-                                <node text="Death destroys you">
+                                <node text="The wizard cackles as he destroys you with a blast from his staff.">
                                     <ending outcome="failure"/>
                                 </node>
                             </choice2>

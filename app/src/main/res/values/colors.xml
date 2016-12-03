@@ -3,4 +3,7 @@
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#004d40</color>
     <color name="colorAccent">#aa00ff</color>
+    <color name="background">#000</color>
+    <color name="winText">#0f0</color>
+    <color name="loseText">#f00</color>
 </resources>

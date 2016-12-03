@@ -1,20 +1,22 @@
 package com.example.liet_kynes.androidadventure;
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.liet_kynes.androidadventure.MainActivity.REQUEST_CODE_FAILURE;
 import static com.example.liet_kynes.androidadventure.MainActivity.REQUEST_CODE_RIDDLE;
+import static com.example.liet_kynes.androidadventure.MainActivity.REQUEST_CODE_VICTORY;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -26,12 +28,9 @@ public class AdventureFragment extends Fragment {
     public static final String DIFFICULTY_LEVEL = "DIFFICULTY_LEVEL";
     public static final String RIDDLE_CONTEXT = "RIDDLE_CONTEXT";
     public static final String RIDDLE_RESULT = "RIDDLE_RESULT";
+    public static final String ENDING_TEXT = "ENDING_TEXT";
     public static final int GET_RIDDLE_RESULT = 0;
-    private String choice = "";
     private Adventure ADVENTURE;
-    Animation fadeInAnimation;
-    Animation fadeOutAnimation;
-    Animation buttonFadeAnimation;
 
 
     public AdventureFragment() {
@@ -70,10 +69,6 @@ public class AdventureFragment extends Fragment {
                 Log.d(TAG, e.getMessage());
             }
         }
-        storyTextView.setVisibility(View.VISIBLE);
-        choiceOneButton.setVisibility(View.VISIBLE);
-        choiceTwoButton.setVisibility(View.VISIBLE);
-
 
         choiceOneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +104,6 @@ public class AdventureFragment extends Fragment {
     }
 
     public static void restartAdventure(AdventureFragment fragment) {
-        fragment.choice = "root";
         fragment.ADVENTURE.restartAdventure();
     }
 
@@ -124,7 +118,7 @@ public class AdventureFragment extends Fragment {
     private void afterLocationChange() {
         if (ADVENTURE.isRiddle()) {
 //                        launch riddle activity
-            launchRiddle(((MainActivity)getActivity()).getDIFFICULTY_LEVEL(), ADVENTURE.getRiddleString());
+            launchRiddle(((MainActivity)getActivity()).getDIFFICULTY_LEVEL(), ADVENTURE.getCurrentTextString());
         }
         else if(ADVENTURE.isVictory()){
             //Nate, these will also be given strings but if you get down the basic
@@ -137,7 +131,18 @@ public class AdventureFragment extends Fragment {
     }
 
     private void launchEnding(boolean victory) {
-
+        Intent toEnding;
+        int requestCode;
+        if(victory) {
+            toEnding = new Intent(getActivity(), VictoryActivity.class);
+            requestCode = REQUEST_CODE_VICTORY;
+        }
+        else {
+            toEnding = new Intent(getActivity(), FailureActivity.class);
+            requestCode = REQUEST_CODE_FAILURE;
+        }
+        toEnding.putExtra(ENDING_TEXT, ADVENTURE.getCurrentTextString());
+        getActivity().startActivityForResult(toEnding, requestCode);
     }
 
     protected void onRiddleResult(Intent data) {
@@ -146,10 +151,12 @@ public class AdventureFragment extends Fragment {
             //how do we access the button here so we can advance the thing?
             //maybe a direct access will work
             ADVENTURE.setNewLocation("choice1");
+            afterLocationChange();
             Toast.makeText(getActivity().getApplicationContext(), "Riddle Passed", Toast.LENGTH_LONG).show();
         }
         else {
             ADVENTURE.setNewLocation("choice2");
+            afterLocationChange();
             Toast.makeText(getActivity().getApplicationContext(), "Riddle Failed", Toast.LENGTH_LONG).show();
         }
     }

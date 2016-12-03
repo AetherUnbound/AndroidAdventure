@@ -1,6 +1,7 @@
 package com.example.liet_kynes.androidadventure;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,8 @@ public class RiddleActivity extends AppCompatActivity {
     private int correctAnswer;
     private Riddle RIDDLE;
     private final String TAG = "RIDDLE_DEBUG";
+    private static MediaPlayer mediaPlayer;
+
 
 
 
@@ -41,6 +44,12 @@ public class RiddleActivity extends AppCompatActivity {
         riddleContext = fromAdventure.getStringExtra(RIDDLE_CONTEXT);
         RIDDLE = new Riddle();
 
+        //Play some meditative music (or stressful)
+        mediaPlayer = MediaPlayer.create(this, R.raw.nightmare); //If we're going to play the same music per song, this can be hard coded.
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+
+        //Parsing data from the XML and adding text to layout
         try {
             correctAnswer = RIDDLE.createRiddle(this.getApplicationContext(), riddleTextView, choiceOneButton, choiceTwoButton, choiceThreeButton, choiceFourButton, difficulty, riddleContext);
             if(correctAnswer < 0) {

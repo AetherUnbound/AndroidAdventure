@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static String EXTRA_MAIN_SOUND = "com.example.lietkynes.androidadventure.main_sound";
     public static String EXTRA_MAIN_SONG = "com.example.lietkynes.androidadventure.main_song";
-    public static String EXTRA_MAIN_NIGHT_MODE = "com.example.lietkynes.androidadventure.main_night_mode";
     public static String EXTRA_MAIN_DIFF_LEVEL = "com.example.lietkynes.androidadventure.main_diff_level";
     public static final int REQUEST_CODE_SETTINGS = 0;
     public static final int REQUEST_CODE_RIDDLE = 1;
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private int DIFFICULTY_LEVEL = 0;
     private int TRACK = R.raw.ambient_cave;
     private boolean IS_PLAYING = true;
-    private boolean IS_NIGHT_MODE = false;
     private static MediaPlayer mediaPlayer;
 
     protected void pauseMusic() {
@@ -127,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra(EXTRA_MAIN_SOUND, IS_PLAYING); //Sound is on by default
             i.putExtra(EXTRA_MAIN_SONG, TRACK); //Default song is element 0 in the array
             i.putExtra(EXTRA_MAIN_DIFF_LEVEL, DIFFICULTY_LEVEL); //Default difficulty is 4, for text input only
-            i.putExtra(EXTRA_MAIN_NIGHT_MODE, IS_NIGHT_MODE); //This may be harder to do than I originally thought, but I'm giving it a shot
 
             startActivityForResult(i, REQUEST_CODE_SETTINGS); //I'm not 100% sure this is proper form, but it works
 
@@ -162,8 +159,6 @@ public class MainActivity extends AppCompatActivity {
                 //Code to change the difficulty level
             }
 
-            //Nightmode code
-            IS_NIGHT_MODE = data.getBooleanExtra(EXTRA_MAIN_NIGHT_MODE, false);
 
             //Turn music/sound off/on
             if (!data.getBooleanExtra(EXTRA_MAIN_SOUND, true)){
@@ -201,12 +196,5 @@ public class MainActivity extends AppCompatActivity {
         TRACK = track;
         resumeMusic();
     }
-
-//    public void replaceAdventureFragmentWithRiddle(RiddleFragment fragment) {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
-//                .addToBackStack(null).commit();
-//    }
-
 
 }

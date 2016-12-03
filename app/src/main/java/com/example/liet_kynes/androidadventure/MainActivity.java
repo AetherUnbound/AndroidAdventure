@@ -71,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Restarting Adventure...", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar snackbar = Snackbar.make(view, "Restarting Adventure...", Snackbar.LENGTH_LONG);
+                snackbar.getView().setBackgroundColor(getColor(R.color.colorAccent));
+                snackbar.setAction("Action", null).show();
+
                 //This code ensures that pressing the FAB from a fragment that's not the main screen
                 // doesn't crash the app
                 Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragment_container);

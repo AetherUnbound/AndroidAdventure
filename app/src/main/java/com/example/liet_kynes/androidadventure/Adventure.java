@@ -187,8 +187,8 @@ public class Adventure {
     private Animation fadeInAnimation;
     private Animation fadeOutAnimation;
 
-    Adventure(Context context, TextView storyTV, Button c1Button, Button c2Button, FragmentActivity activity) {
-        this.parentContext = context;
+    Adventure(TextView storyTV, Button c1Button, Button c2Button, FragmentActivity activity) {
+        this.parentContext = activity.getApplicationContext();
         this.storyTextView = storyTV;
         this.choice1Button = c1Button;
         this.choice2Button = c2Button;
@@ -213,7 +213,7 @@ public class Adventure {
 
     public void restartAdventure() {
         playerTree = adventureTree;
-        this.setNewLocation("root");
+        this.setNewLocation("reset");
     }
 
     private Tree searchAdventureForResume(Tree root, int nodeNumber){
@@ -238,17 +238,37 @@ public class Adventure {
     }
 
 
-    public void setNewLocation(String choice){
+    public void setNewLocation(final String choice){
         if (choice.equals("choice1")) {
             playerTree = playerTree.leftChild;
         }
         else if (choice.equals("choice2")) {
             playerTree = playerTree.rightChild;
         }
+        //Animations encapsulated within class to make transitions smoother
+        fadeOutAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                if(choice.equals("root"))
+                    animation.cancel();
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                storyTextView.setText(playerTree.data.getText());
+                choice1Button.setText(playerTree.data.getChoice1());
+                choice2Button.setText(playerTree.data.getChoice2());
+                storyTextView.startAnimation(fadeInAnimation);
+                choice1Button.startAnimation(fadeInAnimation);
+                choice2Button.startAnimation(fadeInAnimation);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+
         //else the node is the root
-        storyTextView.setText(playerTree.data.getText());
-        choice1Button.setText(playerTree.data.getChoice1());
-        choice2Button.setText(playerTree.data.getChoice2());
+        storyTextView.startAnimation(fadeOutAnimation);
+        choice1Button.startAnimation(fadeOutAnimation);
+        choice2Button.startAnimation(fadeOutAnimation);
     }
 
     public boolean isRiddle() {return (playerTree.data.getEnd() == Ending.RIDDLE);}

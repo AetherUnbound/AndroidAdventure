@@ -103,8 +103,8 @@ public class AdventureFragment extends Fragment {
         super.onDetach();
     }
 
-    public static void restartAdventure(AdventureFragment fragment) {
-        fragment.ADVENTURE.restartAdventure();
+    public void restartAdventure() {
+        ADVENTURE.restartAdventure();
     }
 
     private void launchRiddle(int difficulty, String riddleContext) {

@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
                 Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
                 if(frag instanceof AdventureFragment) {
                     AdventureFragment advFrag = (AdventureFragment)frag;
-                    AdventureFragment.restartAdventure(advFrag);
+//                    AdventureFragment.restartAdventure(advFrag);
+                    advFrag.restartAdventure();
                 }
             }
         });
@@ -177,8 +178,10 @@ public class MainActivity extends AppCompatActivity {
             String toastString;
             if(frag instanceof AdventureFragment) {
                 AdventureFragment advFrag = (AdventureFragment)frag;
-                AdventureFragment.restartAdventure(advFrag);
+//                AdventureFragment.restartAdventure(advFrag);
+                advFrag.restartAdventure();
             }
+
             if(requestCode == REQUEST_CODE_FAILURE)
                 toastString = "Try to do better this time...";
             else
